@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BREW — Specialty Coffee</title>
+  <meta name="description" content="BREW — спеціалізована кав'ярня зі свіжообсмаженою кавою, домашніми снеками та теплою атмосферою.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #faf6f0;
+      --espresso:   #2c1a0e;
+      --terracotta: #c4603a;
+      --terra-light:#e8826a;
+      --terra-pale: #f5e0d8;
+      --text-muted: #7a5c4a;
+      --card-bg:    #fff8f3;
+      --border:     #ecdfd5;
+      --white:      #ffffff;
+      --shadow-sm:  0 2px 8px rgba(44,26,14,.08);
+      --shadow-md:  0 6px 24px rgba(44,26,14,.12);
+      --shadow-lg:  0 16px 48px rgba(44,26,14,.16);
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --radius-xl:  32px;
+      --font-head:  'Playfair Display', Georgia, serif;
+      --font-body:  'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--espresso);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ── Typography ─────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      line-height: 1.2;
+      color: var(--espresso);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 12px;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 96px 0; }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(250,246,240,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--espresso);
+      letter-spacing: .06em;
+    }
+
+    .nav-logo span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      margin-left: 3px;
+      vertical-align: middle;
+      margin-bottom: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 200ms ease;
+    }
+
+    .nav-links a:hover { color: var(--terracotta); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--terra-light);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    #hero {
+      padding-top: 64px; /* offset for fixed nav */
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(44,26,14,.72) 0%,
+        rgba(44,26,14,.45) 50%,
+        rgba(44,26,14,.15) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      backdrop-filter: blur(8px);
+      color: var(--cream);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      padding: 8px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #7ed47e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .6; transform: scale(.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.0;
+      margin-bottom: 8px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--terra-light);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-head);
+      font-size: clamp(20px, 3vw, 28px);
+      color: rgba(250,246,240,.75);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(250,246,240,.85);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--terra-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(196,96,58,.5);
+    }
+
+    .btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cream);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 16px 24px;
+      border: 1.5px solid rgba(250,246,240,.35);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(250,246,240,.7);
+      background: rgba(250,246,240,.1);
+    }
+
+    .btn-ghost svg { width: 18px; height: 18px; }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 40px;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      gap: 2px;
+    }
+
+    .stat-pill {
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--cream);
+      padding: 14px 22px;
+      text-align: center;
+    }
+
+    .stat-pill:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+    .stat-pill:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+
+    .stat-pill .num {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-pill .lbl {
+      display: block;
+      font-size: 12px;
+      opacity: .7;
+      margin-top: 4px;
+    }
+
+    /* ── MENU ───────────────────────────────────────────────── */
+    #menu { background: var(--white); }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(36px, 5vw, 54px);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Tab filters */
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .menu-tab:hover,
+    .menu-tab.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--white);
+    }
+
+    .menu-tab .tab-icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    /* Cards grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      cursor: pointer;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .menu-card-body {
+      padding: 20px 22px 22px;
+    }
+
+    .menu-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .menu-card-name {
+      font-family: var(--font-head);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--espresso);
+      line-height: 1.3;
+    }
+
+    .menu-card-price {
+      flex-shrink: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--terracotta);
+      background: var(--terra-pale);
+      padding: 4px 12px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .menu-card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .menu-card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .04em;
+      padding: 4px 10px;
+      border-radius: 50px;
+      background: rgba(196,96,58,.1);
+      color: var(--terracotta);
+    }
+
+    .menu-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .menu-cta p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    #about {
+      background: var(--espresso);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '"';
+      position: absolute;
+      top: -40px;
+      left: -20px;
+      font-family: var(--font-head);
+      font-size: 400px;
+      color: rgba(196,96,58,.08);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 48%;
+      border-radius: var(--radius-lg);
+      border: 4px solid var(--espresso);
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .about-content .section-label { color: var(--terra-light); }
+
+    .about-content h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .about-content p {
+      font-size: 16px;
+      color: rgba(250,246,240,.75);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-pillars {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .pillar {
+      flex: 1;
+      padding: 20px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .pillar-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(196,96,58,.2);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .pillar-icon svg {
+      width: 22px; height: 22px;
+      color: var(--terra-light);
+    }
+
+    .pillar h4 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .pillar p {
+      font-size: 13px;
+      color: rgba(250,246,240,.55);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── GALLERY ────────────────────────────────────────────── */
+    #gallery { background: var(--cream); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 400ms ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item:nth-child(1) { grid-column: span 5; grid-row: 1; aspect-ratio: 4/3; }
+    .gallery-item:nth-child(2) { grid-column: span 4; grid-row: 1; aspect-ratio: 4/3; }
+    .gallery-item:nth-child(3) { grid-column: span 3; grid-row: 1; aspect-ratio: 3/4; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 3; grid-row: 2; aspect-ratio: 1; }
+    .gallery-item:nth-child(5) { grid-column: span 6; grid-row: 2; aspect-ratio: 16/9; }
+
+    /* ── LOYALTY ────────────────────────────────────────────── */
+    #loyalty { background: var(--terra-pale); }
+
+    .loyalty-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .loyalty-content h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 20px;
+    }
+
+    .loyalty-content p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .loyalty-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .loyalty-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .step-body h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .step-body p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* Loyalty card visual */
+    .loyalty-card-wrap {
+      perspective: 1000px;
+    }
+
+    .loyalty-card {
+      background: linear-gradient(135deg, #2c1a0e 0%, #5c3820 60%, #c4603a 100%);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: rotateY(-8deg) rotateX(4deg);
+    }
+
+    .loyalty-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+
+    .loyalty-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(196,96,58,.3);
+    }
+
+    .lc-brand {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+
+    .lc-type {
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-bottom: 36px;
+    }
+
+    .lc-dots {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .lc-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .lc-dot.filled {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .lc-reward {
+      font-size: 13px;
+      opacity: .7;
+      position: relative; z-index: 1;
+    }
+
+    .lc-reward strong {
+      display: block;
+      font-size: 18px;
+      color: var(--cream);
+      opacity: 1;
+      font-family: var(--font-head);
+    }
+
+    /* ── HOURS ──────────────────────────────────────────────── */
+    #hours {
+      padding: 64px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hours-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+    }
+
+    .hours-group { text-align: center; }
+
+    .hours-group .days {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+    }
+
+    .hours-group .time {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--espresso);
+    }
+
+    .hours-sep {
+      width: 1px;
+      height: 64px;
+      background: var(--border);
+    }
+
+    .hours-icon {
+      text-align: center;
+    }
+
+    .hours-icon svg {
+      width: 48px; height: 48px;
+      color: var(--terracotta);
+      opacity: .6;
+    }
+
+    /* ── CONTACT ────────────────────────────────────────────── */
+    #contact { background: var(--cream); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      margin-bottom: 16px;
+    }
+
+    .contact-info > p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .contact-item-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--terra-pale);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item-icon svg {
+      width: 20px; height: 20px;
+      color: var(--terracotta);
+    }
+
+    .contact-item-text .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-item-text .value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--espresso);
+    }
+
+    .map-placeholder {
+      background: linear-gradient(135deg, var(--terra-pale) 0%, #ecdfd5 100%);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(196,96,58,.12) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(44,26,14,.08) 0%, transparent 50%);
+    }
+
+    .map-icon-wrap {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-md);
+      position: relative; z-index: 1;
+    }
+
+    .map-icon-wrap svg {
+      width: 36px; height: 36px;
+      color: var(--terracotta);
+    }
+
+    .map-address {
+      position: relative; z-index: 1;
+    }
+
+    .map-address p {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--espresso);
+    }
+
+    .map-address span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--espresso);
+      color: rgba(250,246,240,.7);
+      padding: 48px 0 32px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .logo {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: .06em;
+    }
+
+    .footer-brand .tagline {
+      font-size: 13px;
+      color: rgba(250,246,240,.5);
+      margin-top: 6px;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      font-size: 14px;
+      color: rgba(250,246,240,.6);
+      transition: color 200ms ease;
+    }
+
+    .footer-nav a:hover { color: var(--cream); }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 200ms ease;
+    }
+
+    .social-btn:hover { background: var(--terracotta); border-color: var(--terracotta); }
+
+    .social-btn svg {
+      width: 18px; height: 18px;
+      color: var(--cream);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(250,246,240,.4);
+    }
+
+    /* ── FLOATING TELEGRAM BUTTON ──────────────────────────── */
+    .tg-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #2ca5e0;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 22px;
+      border-radius: 50px;
+      box-shadow: 0 4px 24px rgba(44,165,224,.45);
+      cursor: pointer;
+      transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+    }
+
+    .tg-float:hover {
+      background: #1a90cc;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(44,165,224,.6);
+    }
+
+    .tg-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    /* ── PREFERS REDUCED MOTION ─────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    /* ── RESPONSIVE: TABLET ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .about-grid, .loyalty-inner, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-visual {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .loyalty-card { transform: none; }
+
+      .gallery-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .gallery-item:nth-child(1) { grid-column: span 4; aspect-ratio: 4/3; }
+      .gallery-item:nth-child(2) { grid-column: span 2; aspect-ratio: 3/4; grid-row: span 2; }
+      .gallery-item:nth-child(3) { grid-column: span 3; aspect-ratio: 4/3; grid-row: auto; }
+      .gallery-item:nth-child(4) { grid-column: span 3; aspect-ratio: 4/3; }
+      .gallery-item:nth-child(5) { grid-column: span 6; aspect-ratio: 16/9; }
+
+      .nav-links { display: none; }
+    }
+
+    /* ── RESPONSIVE: MOBILE ─────────────────────────────────── */
+    @media (max-width: 640px) {
+      section { padding: 72px 0; }
+
+      .hero-title { font-size: 48px; }
+      .hero-stats { position: static; margin-top: 40px; }
+
+      .hero-content { max-width: 100%; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-item:nth-child(1) { grid-column: span 2; aspect-ratio: 4/3; }
+      .gallery-item:nth-child(2) { grid-column: span 1; aspect-ratio: 1; grid-row: auto; }
+      .gallery-item:nth-child(3) { grid-column: span 1; aspect-ratio: 1; grid-row: auto; }
+      .gallery-item:nth-child(4) { grid-column: span 1; aspect-ratio: 1; }
+      .gallery-item:nth-child(5) { grid-column: span 1; aspect-ratio: 1; }
+
+      .about-pillars { flex-direction: column; }
+      .hours-inner   { gap: 32px; }
+      .hours-sep     { width: 64px; height: 1px; }
+
+      .tg-float span { display: none; }
+      .tg-float { padding: 14px; border-radius: 50%; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-nav   { justify-content: center; }
+      .footer-social { justify-content: center; }
+      .footer-bottom { justify-content: center; text-align: center; }
+
+      .nav-cta span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════ -->
+  <nav aria-label="Головна навігація">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label="BREW — на головну">BREW<span></span></a>
+        <ul class="nav-links" role="list">
+          <li><a href="#menu">Меню</a></li>
+          <li><a href="#about">Про нас</a></li>
+          <li><a href="#gallery">Атмосфера</a></li>
+          <li><a href="#loyalty">Програма</a></li>
+          <li><a href="#contact">Контакти</a></li>
+        </ul>
+        <a href="https://t.me/brew_coffee_kyiv" class="nav-cta" aria-label="Замовити через Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+          </svg>
+          <span>Замовити</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Головний банер">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85&auto=format&fit=crop"
+        alt="Затишна кав'ярня BREW — інтер'єр із теплим освітленням"
+        loading="eager"
+      >
+      <div class="hero-overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" aria-label="Відкрито зараз">Відкрито зараз</div>
+
+        <h1 class="hero-title">
+          BREW<br>
+          <em>Coffee</em>
+        </h1>
+        <p class="hero-subtitle">Specialty кава у Скандинавському стилі</p>
+        <p class="hero-desc">
+          Ми обсмажуємо зерно самостійно, готуємо кожну чашку вручну
+          та створюємо місце, де час сповільнюється.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://t.me/brew_coffee_kyiv" class="btn-primary" aria-label="Замовити каву онлайн через Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+            </svg>
+            Замовити онлайн
+          </a>
+          <a href="#menu" class="btn-ghost" aria-label="Переглянути меню">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+            </svg>
+            Переглянути меню
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-stats" aria-label="Наші показники">
+        <div class="stat-pill">
+          <span class="num">50+</span>
+          <span class="lbl">Позицій</span>
+        </div>
+        <div class="stat-pill">
+          <span class="num">4.9</span>
+          <span class="lbl">Рейтинг</span>
+        </div>
+        <div class="stat-pill">
+          <span class="num">6 р</span>
+          <span class="lbl">Досвіду</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MENU ══════════════════════════════════════════════════ -->
+  <section id="menu" aria-label="Наше меню">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Меню</span>
+        <h2>Ми готуємо з душею</h2>
+        <p>Свіжообсмажена кава, домашні снеки та десерти — кожен день, кожна чашка.</p>
+      </div>
+
+      <div class="menu-tabs" role="tablist" aria-label="Категорії меню">
+        <button class="menu-tab active" role="tab" aria-selected="true">
+          <span class="tab-icon" aria-hidden="true">☕</span> Кава
+        </button>
+        <button class="menu-tab" role="tab" aria-selected="false">
+          <span class="tab-icon" aria-hidden="true">🥐</span> Снеки
+        </button>
+        <button class="menu-tab" role="tab" aria-selected="false">
+          <span class="tab-icon" aria-hidden="true">🍰</span> Десерти
+        </button>
+      </div>
+
+      <div class="menu-grid" role="list">
+
+        <!-- Кава -->
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&q=80&auto=format&fit=crop"
+            alt="Еспресо — класичний ристретто"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Еспресо</h3>
+              <span class="menu-card-price">від 65 грн</span>
+            </div>
+            <p class="menu-card-desc">Класичний подвійний ристретто з нашого авторського бленду. Темний шоколад, карамель, легка кислинка.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Класика</span>
+              <span class="tag">30 мл</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80&auto=format&fit=crop"
+            alt="Флет вайт — кава з молоком"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Флет Вайт</h3>
+              <span class="menu-card-price">від 75 грн</span>
+            </div>
+            <p class="menu-card-desc">Два шоти еспресо та оксамитове мікропіниме молоко. Ідеальний баланс сили та ніжності.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Бестселер</span>
+              <span class="tag">160 мл</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80&auto=format&fit=crop"
+            alt="Фільтрована кава — пуровер"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Фільтр / Пуровер</h3>
+              <span class="menu-card-price">від 85 грн</span>
+            </div>
+            <p class="menu-card-desc">Ручне заварювання з одно-оригінальним зерном. Яскравий терруар, квіткові ноти, чиста чашка.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Single Origin</span>
+              <span class="tag">250 мл</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Снеки -->
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80&auto=format&fit=crop"
+            alt="Круасан з вершковим маслом"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Круасан</h3>
+              <span class="menu-card-price">від 80 грн</span>
+            </div>
+            <p class="menu-card-desc">Хрустке листкове тісто, вершкове масло, випечений вранці. Класичний, з сиром або шоколадом.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Свіжа випічка</span>
+              <span class="tag">Щоденно</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&q=80&auto=format&fit=crop"
+            alt="Тост з авокадо та яйцем"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Тост з Авокадо</h3>
+              <span class="menu-card-price">від 110 грн</span>
+            </div>
+            <p class="menu-card-desc">Хліб на заквасці, свіже авокадо, яйце-пашот, мікрозелень, крупна морська сіль.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Ранковий хіт</span>
+              <span class="tag">Вегетаріанське</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1504387828636-abeb8a1a6d49?w=600&q=80&auto=format&fit=crop"
+            alt="Вівсянка з ягодами та горіхами"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Вівсянка Deluxe</h3>
+              <span class="menu-card-price">від 95 грн</span>
+            </div>
+            <p class="menu-card-desc">Вівсянка на мигдальному молоці, карамелізовані банани, горіхова гранола, свіжі ягоди.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Здорово</span>
+              <span class="tag">Gluten-free опція</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Десерти -->
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80&auto=format&fit=crop"
+            alt="Тірамісу — класичний десерт"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Тірамісу</h3>
+              <span class="menu-card-price">від 95 грн</span>
+            </div>
+            <p class="menu-card-desc">Класичний рецепт з маскарпоне, просоченим савоярді та насиченим еспресо. Дуже.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Фаворит</span>
+              <span class="tag">Авторський</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80&auto=format&fit=crop"
+            alt="Шоколадний брауні"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Брауні</h3>
+              <span class="menu-card-price">від 95 грн</span>
+            </div>
+            <p class="menu-card-desc">Густий шоколадний брауні з шоколадними чанками. Фаджі всередині, хрустке зверху.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Шоколад 70%</span>
+              <span class="tag">Без борошна</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card" role="listitem">
+          <img
+            class="menu-card-img"
+            src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80&auto=format&fit=crop"
+            alt="Чізкейк Нью-Йорк"
+            loading="lazy"
+          >
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-name">Чізкейк</h3>
+              <span class="menu-card-price">від 105 грн</span>
+            </div>
+            <p class="menu-card-desc">Кремовий чізкейк у стилі Нью-Йорк, сезонне ягідне куліс та хрустка основа з печива.</p>
+            <div class="menu-card-tags">
+              <span class="tag">Щодня свіжий</span>
+              <span class="tag">Без глютену (основа)</span>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- end menu-grid -->
+
+      <div class="menu-cta">
+        <a href="https://t.me/brew_coffee_kyiv" class="btn-primary" aria-label="Зробити замовлення через Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+          </svg>
+          Зробити замовлення
+        </a>
+        <p>Швидке замовлення через Telegram — без черги</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══════════════════════════════════════════════════ -->
+  <section id="about" aria-label="Наша історія">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <img
+            class="about-img-main"
+            src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=85&auto=format&fit=crop"
+            alt="Бариста BREW готує каву"
+            loading="lazy"
+          >
+          <img
+            class="about-img-accent"
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&q=80&auto=format&fit=crop"
+            alt="Зерна свіжообсмаженої кави"
+            loading="lazy"
+          >
+        </div>
+        <div class="about-content">
+          <span class="section-label">Наша історія</span>
+          <h2>Народжені з любові до кави</h2>
+          <p>
+            BREW з'явилася 2018 року, коли двоє друзів повернулися з подорожі до Гельсінкі
+            з однією ідеєю: створити місце, де час сповільнюється, а кожна чашка —
+            це маленька церемонія.
+          </p>
+          <p>
+            Ми самостійно обсмажуємо зерно з Ефіопії, Колумбії та Бразилії,
+            постійно навчаємо команду та відмовляємося від компромісів у якості —
+            навіть якщо це означає платити більше за сировину.
+          </p>
+          <p>
+            Скандинавський підхід до мінімалізму пронизує все: від інтер'єру
+            до подачі, від меню до упаковки. Менше зайвого, більше суті.
+          </p>
+
+          <div class="about-pillars" role="list">
+            <div class="pillar" role="listitem">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <h4>Якість</h4>
+              <p>Тільки спеціалізоване зерно Spеcialty Grade</p>
+            </div>
+            <div class="pillar" role="listitem">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h4>Команда</h4>
+              <p>Бариста з Q-Grader сертифікатами</p>
+            </div>
+            <div class="pillar" role="listitem">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
+              </div>
+              <h4>Місце</h4>
+              <p>Затишок і тиша в серці міста</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GALLERY ════════════════════════════════════════════════ -->
+  <section id="gallery" aria-label="Атмосфера BREW">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Атмосфера</span>
+        <h2>Відчуйте BREW</h2>
+        <p>Кожен куток — продуманий. Кожна деталь — з любов'ю.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80&auto=format&fit=crop"
+            alt="Інтер'єр BREW — мінімалістичний скандинавський дизайн"
+            loading="lazy"
+          >
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1559496417-e7f25cb247cd?w=700&q=80&auto=format&fit=crop"
+            alt="Гарна кава латте арт"
+            loading="lazy"
+          >
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=600&q=80&auto=format&fit=crop"
+            alt="Свіжа випічка в BREW"
+            loading="lazy"
+          >
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=700&q=80&auto=format&fit=crop"
+            alt="Затишне місце з книгою і кавою"
+            loading="lazy"
+          >
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=900&q=80&auto=format&fit=crop"
+            alt="Бариста готує пуровер"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LOYALTY ════════════════════════════════════════════════ -->
+  <section id="loyalty" aria-label="Програма лояльності BREW Card">
+    <div class="container">
+      <div class="loyalty-inner">
+        <div class="loyalty-content">
+          <span class="section-label">BREW Card</span>
+          <h2>П'ята кава — від нас</h2>
+          <p>
+            Наша програма лояльності — без додатків та пластикових карток.
+            Просто показуй QR-код у Telegram-боті — і збирай штампи.
+          </p>
+
+          <div class="loyalty-steps" role="list">
+            <div class="loyalty-step" role="listitem">
+              <div class="step-num" aria-hidden="true">1</div>
+              <div class="step-body">
+                <h4>Підпишись на бота</h4>
+                <p>Перейди за посиланням — @brew_coffee_bot, натисни старт.</p>
+              </div>
+            </div>
+            <div class="loyalty-step" role="listitem">
+              <div class="step-num" aria-hidden="true">2</div>
+              <div class="step-body">
+                <h4>Збирай штампи</h4>
+                <p>За кожну замовлену каву ти отримуєш один штамп на картці.</p>
+              </div>
+            </div>
+            <div class="loyalty-step" role="listitem">
+              <div class="step-num" aria-hidden="true">3</div>
+              <div class="step-body">
+                <h4>П'ята — безкоштовна</h4>
+                <p>Після 5 штампів обирай будь-яку каву в подарунок від BREW.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="loyalty-card-wrap" aria-label="Приклад BREW Card">
+          <div class="loyalty-card">
+            <div class="lc-brand">BREW</div>
+            <div class="lc-type">Loyalty Card</div>
+            <div class="lc-dots" aria-label="4 із 5 штампів зібрано">
+              <div class="lc-dot filled" aria-hidden="true">☕</div>
+              <div class="lc-dot filled" aria-hidden="true">☕</div>
+              <div class="lc-dot filled" aria-hidden="true">☕</div>
+              <div class="lc-dot filled" aria-hidden="true">☕</div>
+              <div class="lc-dot" aria-hidden="true"></div>
+            </div>
+            <div class="lc-reward">
+              Ще один до безкоштовної кави
+              <strong>Безкоштовна кава</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOURS ══════════════════════════════════════════════════ -->
+  <section id="hours" aria-label="Години роботи">
+    <div class="container">
+      <div class="hours-inner">
+        <div class="hours-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+          </svg>
+        </div>
+        <div class="hours-sep" aria-hidden="true"></div>
+        <div class="hours-group">
+          <div class="days">Пн — Пт</div>
+          <div class="time" aria-label="08:00 — 21:00">08:00 — 21:00</div>
+        </div>
+        <div class="hours-sep" aria-hidden="true"></div>
+        <div class="hours-group">
+          <div class="days">Сб — Нд</div>
+          <div class="time" aria-label="09:00 — 22:00">09:00 — 22:00</div>
+        </div>
+        <div class="hours-sep" aria-hidden="true"></div>
+        <div class="hours-group">
+          <div class="days">Без вихідних</div>
+          <div class="time">365 днів</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ════════════════════════════════════════════════ -->
+  <section id="contact" aria-label="Контакти та розташування">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="section-label">Де знайти нас</span>
+          <h2>Завітайте в BREW</h2>
+          <p>
+            Ми знаходимось у самому серці міста. Легко доїхати метро,
+            є безкоштовне велопаркування та тиха зона для роботи.
+          </p>
+
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="contact-item-text">
+                <div class="label">Адреса</div>
+                <div class="value">вул. Кофейна, 12, Київ</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="contact-item-text">
+                <div class="label">Телефон</div>
+                <div class="value">+38 (044) 263-81-47</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-item-text">
+                <div class="label">Email</div>
+                <div class="value">hello@brew.coffee</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+                </svg>
+              </div>
+              <div class="contact-item-text">
+                <div class="label">Telegram</div>
+                <div class="value">@brew_coffee_bot</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://t.me/brew_coffee_kyiv" class="btn-primary" aria-label="Замовити через Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+            </svg>
+            Замовити зараз
+          </a>
+        </div>
+
+        <div class="map-placeholder" aria-label="Карта розташування BREW — вул. Кофейна, 12, Київ">
+          <div class="map-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="map-address">
+            <p>вул. Кофейна, 12</p>
+            <span>Київ • ст.м. Золоті Ворота</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="logo">BREW</div>
+          <div class="tagline">Specialty Coffee · Київ, з 2018</div>
+        </div>
+
+        <nav aria-label="Навігація у футері">
+          <ul class="footer-nav" role="list">
+            <li><a href="#menu">Меню</a></li>
+            <li><a href="#about">Про нас</a></li>
+            <li><a href="#loyalty">BREW Card</a></li>
+            <li><a href="#contact">Контакти</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-social" aria-label="Соціальні мережі">
+          <!-- Instagram -->
+          <a href="#" class="social-btn" aria-label="BREW в Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <!-- Telegram -->
+          <a href="https://t.me/brew_coffee_kyiv" class="social-btn" aria-label="BREW в Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+            </svg>
+          </a>
+          <!-- TikTok -->
+          <a href="#" class="social-btn" aria-label="BREW в TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l.02-8.16a8.17 8.17 0 0 0 4.78 1.52V5.23a4.85 4.85 0 0 1-1.03-.54z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 BREW Specialty Coffee. Всі права захищені.</p>
+        <p>Зроблено з любов'ю до доброї кави ☕</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ FLOATING TELEGRAM BUTTON ══════════════════════════════ -->
+  <a
+    href="https://t.me/brew_coffee_kyiv"
+    class="tg-float"
+    aria-label="Замовити каву в Telegram"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
+    </svg>
+    <span>Замовити зараз</span>
+  </a>
+
+</body>
+</html>
