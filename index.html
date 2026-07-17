@@ -169,6 +169,15 @@
       object-position: center 40%;
     }
 
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -227,6 +236,17 @@
     .hero-title em {
       font-style: italic;
       color: var(--terra-light);
+    }
+
+    .hero-brand-mark {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--terra-light);
+      margin-bottom: 10px;
     }
 
     .hero-subtitle {
@@ -587,6 +607,21 @@
       line-height: 1.5;
     }
 
+    .about-amenities {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      font-size: 14px;
+      color: rgba(250,246,240,.75);
+    }
+
+    .about-amenities span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* ── GALLERY ────────────────────────────────────────────── */
     #gallery { background: var(--cream); }
 
@@ -616,6 +651,62 @@
     .gallery-item:nth-child(3) { grid-column: span 3; grid-row: 1; aspect-ratio: 3/4; grid-row: span 2; }
     .gallery-item:nth-child(4) { grid-column: span 3; grid-row: 2; aspect-ratio: 1; }
     .gallery-item:nth-child(5) { grid-column: span 6; grid-row: 2; aspect-ratio: 16/9; }
+
+    /* ── REVIEWS ────────────────────────────────────────────── */
+    #reviews { background: var(--white); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .review-stars {
+      color: var(--terracotta);
+      font-size: 15px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      font-size: 15px;
+      color: var(--espresso);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--terra-pale);
+      color: var(--terracotta);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .review-name { font-size: 14px; font-weight: 600; }
+    .review-meta { font-size: 12.5px; color: var(--text-muted); }
+
+    @media (max-width: 860px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── LOYALTY ────────────────────────────────────────────── */
     #loyalty { background: var(--terra-pale); }
@@ -1127,6 +1218,7 @@
         <ul class="nav-links" role="list">
           <li><a href="#menu">Меню</a></li>
           <li><a href="#about">Про нас</a></li>
+          <li><a href="#reviews">Відгуки</a></li>
           <li><a href="#gallery">Атмосфера</a></li>
           <li><a href="#loyalty">Програма</a></li>
           <li><a href="#contact">Контакти</a></li>
@@ -1149,6 +1241,14 @@
         alt="Затишна кав'ярня BREW — інтер'єр із теплим освітленням"
         loading="eager"
       >
+      <video
+        class="hero-video"
+        autoplay muted loop playsinline preload="metadata"
+        poster="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85&auto=format&fit=crop"
+        aria-hidden="true"
+      >
+        <source src="https://videos.pexels.com/video-files/6769796/6769796-hd_1280_720_24fps.mp4" type="video/mp4">
+      </video>
       <div class="hero-overlay" aria-hidden="true"></div>
     </div>
 
@@ -1157,8 +1257,8 @@
         <div class="hero-badge" aria-label="Відкрито зараз">Відкрито зараз</div>
 
         <h1 class="hero-title">
-          BREW<br>
-          <em>Coffee</em>
+          <span class="hero-brand-mark">BREW</span>
+          Ранок, заради якого<br><em>варто прокинутись</em>
         </h1>
         <p class="hero-subtitle">Specialty кава у Скандинавському стилі</p>
         <p class="hero-desc">
@@ -1255,7 +1355,7 @@
               <h3 class="menu-card-name">Флет Вайт</h3>
               <span class="menu-card-price">від 75 грн</span>
             </div>
-            <p class="menu-card-desc">Два шоти еспресо та оксамитове мікропіниме молоко. Ідеальний баланс сили та ніжності.</p>
+            <p class="menu-card-desc">Два шоти еспресо та оксамитове мікропінне молоко. Ідеальний баланс сили та ніжності.</p>
             <div class="menu-card-tags">
               <span class="tag">Бестселер</span>
               <span class="tag">160 мл</span>
@@ -1357,7 +1457,7 @@
               <h3 class="menu-card-name">Тірамісу</h3>
               <span class="menu-card-price">від 95 грн</span>
             </div>
-            <p class="menu-card-desc">Класичний рецепт з маскарпоне, просоченим савоярді та насиченим еспресо. Дуже.</p>
+            <p class="menu-card-desc">Класичний рецепт з маскарпоне, просоченим савоярді та насиченим еспресо. Дуже рекомендуємо гостям — один із найпопулярніших десертів у нашому меню.</p>
             <div class="menu-card-tags">
               <span class="tag">Фаворит</span>
               <span class="tag">Авторський</span>
@@ -1485,6 +1585,11 @@
               <p>Затишок і тиша в серці міста</p>
             </div>
           </div>
+
+          <div class="about-amenities" role="list" aria-label="Зручності BREW">
+            <span role="listitem">☕ Wifi</span>
+            <span role="listitem">🛋 Затишна зона для роботи</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1538,6 +1643,85 @@
     </div>
   </section>
 
+  <!-- ══ REVIEWS ════════════════════════════════════════════════ -->
+  <section id="reviews" aria-label="Відгуки гостей">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Відгуки</span>
+        <h2>Що кажуть гості</h2>
+        <p>Понад 300 відгуків у Google та Instagram — ось декілька з них.</p>
+      </div>
+      <div class="reviews-grid" role="list">
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">Найкраща кава в районі, перевірено. Бариста завжди пам'ятають мій замовлення, а флет вайт тут просто ідеальний.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">О</div>
+            <div>
+              <div class="review-name">Олена К.</div>
+              <div class="review-meta">Google, 2 тижні тому</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">Заходжу сюди попрацювати вже пів року — тихо, затишно, є вайфай і зручні розетки. Тірамісу — окрема причина повертатись.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">М</div>
+            <div>
+              <div class="review-name">Максим Т.</div>
+              <div class="review-meta">Google, 1 місяць тому</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">Скандинавський інтер'єр, ароматна кава власного обсмаження і дуже привітний персонал. Один із небагатьох закладів, де хочеться затриматись.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">Н</div>
+            <div>
+              <div class="review-name">Наталія П.</div>
+              <div class="review-meta">Instagram, 3 тижні тому</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">BREW Card — це просто топ. За кілька тижнів набрала штампи на безкоштовну каву, а обслуговування щоразу на висоті.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">Д</div>
+            <div>
+              <div class="review-name">Дарʼя С.</div>
+              <div class="review-meta">Google, 5 днів тому</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">Привів сюди друзів з-за кордону — всі були в захваті від латте-арту і від того, наскільки тут спокійно навіть у ранковий пік.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">А</div>
+            <div>
+              <div class="review-name">Андрій В.</div>
+              <div class="review-meta">Google, 1 місяць тому</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card" role="listitem">
+          <div class="review-stars" aria-label="5 з 5 зірок">★★★★★</div>
+          <p class="review-text">Обсмажують зерно самі — і це відчувається у смаку. Раджу спробувати пуровер, якщо любите каву без молока.</p>
+          <div class="review-person">
+            <div class="review-avatar" aria-hidden="true">І</div>
+            <div>
+              <div class="review-name">Ірина Ж.</div>
+              <div class="review-meta">Instagram, 2 місяці тому</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ LOYALTY ════════════════════════════════════════════════ -->
   <section id="loyalty" aria-label="Програма лояльності BREW Card">
     <div class="container">
@@ -1555,7 +1739,7 @@
               <div class="step-num" aria-hidden="true">1</div>
               <div class="step-body">
                 <h4>Підпишись на бота</h4>
-                <p>Перейди за посиланням — @brew_coffee_bot, натисни старт.</p>
+                <p>Перейди за посиланням — <a href="https://t.me/brew_coffee_bot" target="_blank" rel="noopener" style="color:var(--terra-light);text-decoration:underline;text-underline-offset:3px">@brew_coffee_bot</a>, натисни старт.</p>
               </div>
             </div>
             <div class="loyalty-step" role="listitem">
@@ -1646,7 +1830,7 @@
               </div>
               <div class="contact-item-text">
                 <div class="label">Адреса</div>
-                <div class="value">вул. Кофейна, 12, Київ</div>
+                <div class="value">вул. Золотоворітська, 6, Київ</div>
               </div>
             </div>
             <div class="contact-item">
@@ -1680,7 +1864,7 @@
               </div>
               <div class="contact-item-text">
                 <div class="label">Telegram</div>
-                <div class="value">@brew_coffee_bot</div>
+                <div class="value"><a href="https://t.me/brew_coffee_bot" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">@brew_coffee_bot</a></div>
               </div>
             </div>
           </div>
@@ -1693,7 +1877,7 @@
           </a>
         </div>
 
-        <div class="map-placeholder" aria-label="Карта розташування BREW — вул. Кофейна, 12, Київ">
+        <div class="map-placeholder" aria-label="Карта розташування BREW — вул. Золотоворітська, 6, Київ">
           <div class="map-icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -1701,7 +1885,7 @@
             </svg>
           </div>
           <div class="map-address">
-            <p>вул. Кофейна, 12</p>
+            <p>вул. Золотоворітська, 6</p>
             <span>Київ • ст.м. Золоті Ворота</span>
           </div>
         </div>
@@ -1722,6 +1906,7 @@
           <ul class="footer-nav" role="list">
             <li><a href="#menu">Меню</a></li>
             <li><a href="#about">Про нас</a></li>
+            <li><a href="#reviews">Відгуки</a></li>
             <li><a href="#loyalty">BREW Card</a></li>
             <li><a href="#contact">Контакти</a></li>
           </ul>
@@ -1820,11 +2005,11 @@
 #wbw-tg{display:block;text-decoration:none;text-align:center;background:#2aabee;color:#fff;font-weight:800;font-size:15px;border-radius:14px;padding:15px}
 @media(max-width:480px){#wbw-overlay{padding:0;align-items:flex-end}#wbw-card{max-width:none;border-radius:22px 22px 0 0;padding-bottom:calc(24px + env(safe-area-inset-bottom))}}
 </style>
-<div id="wbw-overlay" role="dialog" aria-modal="true" aria-label="Бронювання столика">
+<div id="wbw-overlay" role="dialog" aria-modal="true" aria-label="Замовлення столика">
   <div id="wbw-card">
     <button id="wbw-close" aria-label="Закрити">✕</button>
     <div id="wbw-form-view">
-      <h2 id="wbw-title">Бронювання столика</h2>
+      <h2 id="wbw-title">Замовлення столика</h2>
       <p id="wbw-sub">Заповніть форму — адміністратор передзвонить протягом 15 хвилин</p>
       <label class="wbw-lbl" for="wbw-name">Ваше ім'я</label>
       <input class="wbw-inp" id="wbw-name" type="text" placeholder="Як до вас звертатись" autocomplete="name">
@@ -1836,7 +2021,7 @@
       <input class="wbw-inp" id="wbw-date" type="date" style="margin-bottom:14px">
       <label class="wbw-lbl">Зручний час</label>
       <div class="wbw-slots" id="wbw-slots"></div>
-      <button id="wbw-submit">Забронювати</button>
+      <button id="wbw-submit">Замовити</button>
       <p id="wbw-note">Це демо: у робочій версії сайту заявка миттєво прилітає власнику в Telegram 📲</p>
     </div>
     <div id="wbw-done">
@@ -1891,7 +2076,7 @@
     if(!ok)return;
     var btn=this;btn.disabled=true;btn.textContent='Надсилаємо…';
     setTimeout(function(){
-      btn.disabled=false;btn.textContent='Забронювати';
+      btn.disabled=false;btn.textContent='Замовити';
       document.getElementById('wbw-done-txt').textContent='Дякуємо, '+name+'! Ми передзвонимо протягом 15 хвилин, щоб підтвердити '+document.getElementById('wbw-date').value.split('-').reverse().join('.')+' о '+chosen+'.';
       document.getElementById('wbw-form-view').style.display='none';
       document.getElementById('wbw-done').style.display='block';
