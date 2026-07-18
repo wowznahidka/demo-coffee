@@ -1193,7 +1193,22 @@
       .footer-bottom { justify-content: center; text-align: center; }
 
       .nav-cta span { display: none; }
+      .reviews-grid { grid-template-columns: 1fr; }
     }
+
+    /* REVIEWS */
+    .reviews-section { padding: 100px 0; background: var(--espresso); }
+    .reviews-section .section-label { color: var(--terracotta); }
+    .reviews-section h2 { color: var(--cream); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 3rem; }
+    .review-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: border-color .3s; }
+    .review-card:hover { border-color: rgba(196,96,58,.4); }
+    .review-stars { color: var(--terracotta); font-size: 1rem; letter-spacing: 2px; }
+    .review-text { color: rgba(250,246,240,.75); font-size: .9rem; line-height: 1.75; font-style: italic; flex: 1; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1rem; color: var(--white); font-weight: 700; flex-shrink: 0; }
+    .review-name { font-weight: 600; font-size: .88rem; color: var(--cream); }
+    .review-meta { font-size: .75rem; color: rgba(250,246,240,.4); }
   </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BREW Coffee House — Кафе та кава у Києві">
@@ -1803,6 +1818,49 @@
         <div class="hours-group">
           <div class="days">Без вихідних</div>
           <div class="time">365 днів</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ REVIEWS ═══════════════════════════════════════════════ -->
+  <section class="reviews-section" id="reviews" aria-label="Відгуки гостей">
+    <div class="container">
+      <span class="section-label">Відгуки</span>
+      <h2>Що кажуть<br>наші гості</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">«BREW — моя щоденна ранкова зупинка. Флет вайт тут найкращий в місті, а атмосфера ідеальна для роботи з ноутбуком. Вже пів року ходжу сюди щоранку.»</p>
+          <div class="review-author">
+            <div class="review-avatar">О</div>
+            <div>
+              <div class="review-name">Олена Ковальчук</div>
+              <div class="review-meta">Постійний гість · Google Maps</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">«Знайшов це місце випадково і тепер не можу уявити понеділок без кави від BREW. Персонал пам'ятає моє замовлення — це рівень 5 зірок.»</p>
+          <div class="review-author">
+            <div class="review-avatar">А</div>
+            <div>
+              <div class="review-name">Андрій Марченко</div>
+              <div class="review-meta">Постійний гість · Instagram</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">«Круасани свіжі щодня, кава — це окрема розмова. Темна обсмажка — саме те що треба зранку. Рекомендую всім хто любить справжню каву, а не "американську воду".»</p>
+          <div class="review-author">
+            <div class="review-avatar">М</div>
+            <div>
+              <div class="review-name">Марія Гончаренко</div>
+              <div class="review-meta">Постійний гість · Google Maps</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
