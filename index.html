@@ -1210,7 +1210,18 @@
     .review-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 1rem; color: var(--white); font-weight: 700; flex-shrink: 0; }
     .review-name { font-weight: 600; font-size: .88rem; color: var(--cream); }
     .review-meta { font-size: .75rem; color: rgba(250,246,240,.4); }
-  </style>
+  
+    /* ── mobile burger ── */
+    .nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:auto;z-index:200}
+    .nav-burger span{display:block;width:22px;height:2px;background:#2c1810;border-radius:1px;transition:all .3s}
+    @media(max-width:767px){.nav-burger{display:flex}}
+    .nav-fly{display:none;position:fixed;inset:0;background:#faf6f0;z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+    .nav-fly.open{display:flex}
+    .nav-fly a:not(.fly-cta){font-size:1.7rem;font-weight:600;color:#2c1810;text-decoration:none;transition:opacity .2s}
+    .nav-fly a:not(.fly-cta):hover{opacity:.7}
+    .fly-cta{margin-top:.8rem;padding:14px 36px;background:#c0533a;color:#fff;border-radius:8px;font-size:1rem;font-weight:700;text-decoration:none}
+    .nav-fly-close{position:absolute;top:20px;right:24px;font-size:30px;color:#7a5c4a;background:none;border:none;cursor:pointer;line-height:1}
+    </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="BREW Coffee House — Кафе та кава у Києві">
 <meta property="og:description" content="Авторська кава, затишок, смачна випічка. Працюємо з 08:00. Є wi-fi та зони відпочинку.">
@@ -1238,6 +1249,7 @@
           <li><a href="#loyalty">Програма</a></li>
           <li><a href="#contact">Контакти</a></li>
         </ul>
+      <button class="nav-burger" aria-label="Відкрити меню" id="nav-burger-btn"><span></span><span></span><span></span></button>
         <a href="https://telegram.me/znahidkawow" class="nav-cta" aria-label="Замовити через Telegram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.755l-1.68 7.92c-.125.593-.453.74-.918.46l-2.54-1.872-1.225 1.179c-.135.135-.25.25-.514.25l.184-2.604 4.734-4.276c.206-.184-.045-.285-.32-.102L8.23 14.71l-2.49-.777c-.54-.17-.55-.54.113-.797l9.71-3.741c.45-.162.843.11.367.359z"/>
@@ -1247,6 +1259,18 @@
       </div>
     </div>
   </nav>
+
+  <div class="nav-fly" id="nav-fly" role="dialog" aria-modal="true" aria-label="Мобільне меню">
+    <button class="nav-fly-close" id="nav-fly-close" aria-label="Закрити меню">&#215;</button>
+    <a href="#menu">Меню</a>
+    <a href="#about">Про нас</a>
+    <a href="#reviews">Відгуки</a>
+    <a href="#gallery">Атмосфера</a>
+    <a href="#loyalty">Програма</a>
+    <a href="#contact">Контакти</a>
+    <a href="https://telegram.me/znahidkawow" class="fly-cta" target="_blank" rel="noopener">Замовити</a>
+  </div>
+
 
   <!-- ══ HERO ══════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Головний банер">
@@ -2346,5 +2370,15 @@ fbq('trackCustom', 'DemoView', {demo: 'coffee'});
 </script>
 <!-- /wow-demo-pixel -->
 
+  <script>
+  (function(){{
+    var btn=document.getElementById('nav-burger-btn'),fly=document.getElementById('nav-fly'),cls=document.getElementById('nav-fly-close');
+    function open(){{fly.classList.add('open');document.body.style.overflow='hidden'}}
+    function close(){{fly.classList.remove('open');document.body.style.overflow=''}}
+    if(btn)btn.addEventListener('click',open);
+    if(cls)cls.addEventListener('click',close);
+    fly&&fly.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',close)}});
+  }})();
+  </script>
 </body>
 </html>
